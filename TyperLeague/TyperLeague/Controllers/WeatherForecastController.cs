@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+//lol
 
 namespace TyperLeague.Controllers
 {
