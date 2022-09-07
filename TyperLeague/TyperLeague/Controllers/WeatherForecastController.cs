@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 
-
 namespace TyperLeague.Controllers
 {
     [ApiController]
