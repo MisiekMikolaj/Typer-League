@@ -1,0 +1,14 @@
+D:\Github\Typer-League\TyperLeague\TyperLeague.DataAccess\bin\Debug\net6.0\TyperLeague.DataAccess.deps.json
+D:\Github\Typer-League\TyperLeague\TyperLeague.DataAccess\bin\Debug\net6.0\TyperLeague.DataAccess.dll
+D:\Github\Typer-League\TyperLeague\TyperLeague.DataAccess\bin\Debug\net6.0\TyperLeague.DataAccess.pdb
+D:\Github\Typer-League\TyperLeague\TyperLeague.DataAccess\obj\Debug\net6.0\TyperLeague.DataAccess.csproj.AssemblyReference.cache
+D:\Github\Typer-League\TyperLeague\TyperLeague.DataAccess\obj\Debug\net6.0\TyperLeague.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+D:\Github\Typer-League\TyperLeague\TyperLeague.DataAccess\obj\Debug\net6.0\TyperLeague.DataAccess.AssemblyInfoInputs.cache
+D:\Github\Typer-League\TyperLeague\TyperLeague.DataAccess\obj\Debug\net6.0\TyperLeague.DataAccess.AssemblyInfo.cs
+D:\Github\Typer-League\TyperLeague\TyperLeague.DataAccess\obj\Debug\net6.0\TyperLeague.DataAccess.csproj.CoreCompileInputs.cache
+D:\Github\Typer-League\TyperLeague\TyperLeague.DataAccess\obj\Debug\net6.0\TyperLeague.DataAccess.dll
+D:\Github\Typer-League\TyperLeague\TyperLeague.DataAccess\obj\Debug\net6.0\refint\TyperLeague.DataAccess.dll
+D:\Github\Typer-League\TyperLeague\TyperLeague.DataAccess\obj\Debug\net6.0\TyperLeague.DataAccess.pdb
+D:\Github\Typer-League\TyperLeague\TyperLeague.DataAccess\obj\Debug\net6.0\ref\TyperLeague.DataAccess.dll
+D:\Github\Typer-League\TyperLeague\TyperLeague.DataAccess\bin\Debug\net6.0\TyperLeague.DataAccess.runtimeconfig.json
+D:\Github\Typer-League\TyperLeague\TyperLeague.DataAccess\obj\Debug\net6.0\TyperLeague.DataAccess.genruntimeconfig.cache
