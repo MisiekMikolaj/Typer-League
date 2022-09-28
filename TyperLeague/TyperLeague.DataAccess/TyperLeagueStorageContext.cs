@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Text.RegularExpressions;
+using TyperLeague.DataAccess.Entities;
 
 namespace TyperLeague.DataAccess
 {
@@ -9,6 +9,9 @@ namespace TyperLeague.DataAccess
         {
         }
 
-        public DbSet<Match> Matches { get; set; }
+        public DbSet<Game>? Games { get; set; }
+        public DbSet<Team>? Teams { get; set; }
+        public DbSet<Bet>? Bets { get; set; }
+        public DbSet<User>? Users { get; set; }
     }
 }
