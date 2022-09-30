@@ -3,5 +3,7 @@
     public class Game : ModelBase
     {
         public string Result { get; set; }
+        public int? FirstTeamId { get; set; }
+        public int? SecondTeamId { get; set; }
     }
 }

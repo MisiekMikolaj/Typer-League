@@ -22,21 +22,6 @@ namespace TyperLeague.DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("GameTeam", b =>
-                {
-                    b.Property<int>("GameId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeamId")
-                        .HasColumnType("int");
-
-                    b.HasKey("GameId", "TeamId");
-
-                    b.HasIndex("TeamId");
-
-                    b.ToTable("GameTeam");
-                });
-
             modelBuilder.Entity("TyperLeague.DataAccess.Entities.Bet", b =>
                 {
                     b.Property<int>("Id")
@@ -79,7 +64,7 @@ namespace TyperLeague.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Bets");
+                    b.ToTable("Bets", (string)null);
                 });
 
             modelBuilder.Entity("TyperLeague.DataAccess.Entities.Game", b =>
@@ -90,12 +75,22 @@ namespace TyperLeague.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("FirstTeamId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Result")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("SecondTeamId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Games");
+                    b.HasIndex("FirstTeamId");
+
+                    b.HasIndex("SecondTeamId");
+
+                    b.ToTable("Games", (string)null);
                 });
 
             modelBuilder.Entity("TyperLeague.DataAccess.Entities.Team", b =>
@@ -113,7 +108,7 @@ namespace TyperLeague.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teams");
+                    b.ToTable("Teams", (string)null);
                 });
 
             modelBuilder.Entity("TyperLeague.DataAccess.Entities.User", b =>
@@ -142,22 +137,7 @@ namespace TyperLeague.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("GameTeam", b =>
-                {
-                    b.HasOne("TyperLeague.DataAccess.Entities.Game", null)
-                        .WithMany()
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TyperLeague.DataAccess.Entities.Team", null)
-                        .WithMany()
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("TyperLeague.DataAccess.Entities.Bet", b =>
@@ -181,7 +161,29 @@ namespace TyperLeague.DataAccess.Migrations
 
             modelBuilder.Entity("TyperLeague.DataAccess.Entities.Game", b =>
                 {
+                    b.HasOne("TyperLeague.DataAccess.Entities.Team", "FirstTeam")
+                        .WithMany("FirstTeamGames")
+                        .HasForeignKey("FirstTeamId");
+
+                    b.HasOne("TyperLeague.DataAccess.Entities.Team", "SecondTeam")
+                        .WithMany("SecondTeamGames")
+                        .HasForeignKey("SecondTeamId");
+
+                    b.Navigation("FirstTeam");
+
+                    b.Navigation("SecondTeam");
+                });
+
+            modelBuilder.Entity("TyperLeague.DataAccess.Entities.Game", b =>
+                {
                     b.Navigation("Bet");
+                });
+
+            modelBuilder.Entity("TyperLeague.DataAccess.Entities.Team", b =>
+                {
+                    b.Navigation("FirstTeamGames");
+
+                    b.Navigation("SecondTeamGames");
                 });
 
             modelBuilder.Entity("TyperLeague.DataAccess.Entities.User", b =>

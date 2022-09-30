@@ -1,11 +1,14 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using TyperLeague.ApplicationServices.API.Domain;
+using TyperLeague.ApplicationServices.API.Mappings;
 using TyperLeague.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddAutoMapper(typeof(BetsProfile).Assembly);
+
 builder.Services.AddMediatR(typeof(ResponseBase<>));
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

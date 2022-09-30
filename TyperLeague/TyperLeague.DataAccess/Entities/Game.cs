@@ -1,11 +1,16 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace TyperLeague.DataAccess.Entities
 {
     public class Game : EntityBase
     {
-        public List<Team> Team { get; set; }
-        /*public Team team1 { get; set; }
-        public Team team2 { get; set; }*/
+        public int? FirstTeamId { get; set; }
+        public int? SecondTeamId { get; set; }
+        public Team? FirstTeam { get; set; }
+        public Team? SecondTeam { get; set; }
         public List<Bet> Bet { get; set; }
         public string? Result { get; set; }
 
