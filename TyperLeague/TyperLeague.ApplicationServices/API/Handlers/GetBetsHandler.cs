@@ -2,31 +2,36 @@
 using MediatR;
 using TyperLeague.ApplicationServices.API.Domain;
 using TyperLeague.DataAccess;
+using TyperLeague.DataAccess.CQRS.Queries;
 using TyperLeague.DataAccess.Entities;
 
 namespace TyperLeague.ApplicationServices.API.Handlers
 {
     public class GetBetsHandler : IRequestHandler<GetBetsRequest, GetBetsResponse>
     {
-        private readonly IRepository<Bet> betRepository;
-        IMapper mapper;
+       private readonly IMapper mapper;
+        private readonly IQueryExecutor queryExecutor;
 
-        public GetBetsHandler(IRepository<Bet> betRepository, IMapper mapper)
+
+        public GetBetsHandler(IMapper mapper, IQueryExecutor queryExecutor )
         {
-            this.betRepository = betRepository;
             this.mapper = mapper;
+            this.queryExecutor = queryExecutor;
         }
 
-        public Task<GetBetsResponse> Handle(GetBetsRequest request, CancellationToken cancellationToken)
+        public async Task<GetBetsResponse> Handle(GetBetsRequest request, CancellationToken cancellationToken)
         {
-            var bets = this.betRepository.GetAll();
+            var query = new GetBetsQuery()
+            {
+            };
+            var bets = await this.queryExecutor.Execute(query);
             var mappedBets = this.mapper.Map<List<Domain.Models.Bet>>(bets);
 
             var response = new GetBetsResponse()
             {
                 Data = mappedBets
             };
-            return Task.FromResult(response);
+            return response;
         }
     }
 }

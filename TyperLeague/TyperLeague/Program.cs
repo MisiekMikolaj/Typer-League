@@ -7,6 +7,8 @@ using TyperLeague.DataAccess;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddTransient<IQueryExecutor, QueryExecutor>();
+
 builder.Services.AddAutoMapper(typeof(BetsProfile).Assembly);
 
 builder.Services.AddMediatR(typeof(ResponseBase<>));

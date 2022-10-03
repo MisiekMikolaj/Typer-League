@@ -2,24 +2,26 @@
 using MediatR;
 using TyperLeague.ApplicationServices.API.Domain;
 using TyperLeague.DataAccess;
+using TyperLeague.DataAccess.CQRS.Queries;
 using TyperLeague.DataAccess.Entities;
 
 namespace TyperLeague.ApplicationServices.API.Handlers
 {
     public class GetTeamsHandler : IRequestHandler<GetTeamsRequest, GetTeamsResponse>
     {
-        private readonly IRepository<Team> teamsRepository;
         private readonly IMapper mapper;
+        private readonly IQueryExecutor queryExecutor;
 
-        public GetTeamsHandler(DataAccess.IRepository<Team> teamsRepository, IMapper mapper)
+        public GetTeamsHandler(IMapper mapper, IQueryExecutor queryExecutor)
         {
-            this.teamsRepository = teamsRepository;
             this.mapper = mapper;
+            this.queryExecutor = queryExecutor;
         }
 
-        public Task<GetTeamsResponse> Handle(GetTeamsRequest request, CancellationToken cancellationToken)
+        public async Task<GetTeamsResponse> Handle(GetTeamsRequest request, CancellationToken cancellationToken)
         {
-            var teams = teamsRepository.GetAll();
+            var query = new GetTeamsQuery();
+            var teams = await this.queryExecutor.Execute(query);
             var mappedTeams = this.mapper.Map<List<Domain.Models.Team>>(teams);
 
             var response = new GetTeamsResponse()
@@ -27,7 +29,7 @@ namespace TyperLeague.ApplicationServices.API.Handlers
                 Data = mappedTeams
             };
 
-            return Task.FromResult(response);
+            return response;
         }
     }
 }

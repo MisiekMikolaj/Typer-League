@@ -16,8 +16,6 @@ namespace TyperLeague.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<Game>()
                 .HasOne(x => x.FirstTeam)
                 .WithMany(x => x.FirstTeamGames)
