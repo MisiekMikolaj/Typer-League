@@ -13,6 +13,5 @@ namespace TyperLeague.DataAccess.Entities
         public Team? SecondTeam { get; set; }
         public List<Bet> Bet { get; set; }
         public string? Result { get; set; }
-
     }
 }

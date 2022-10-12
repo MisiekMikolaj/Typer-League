@@ -3,11 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using TyperLeague.ApplicationServices.API.Domain;
 using TyperLeague.ApplicationServices.API.Mappings;
 using TyperLeague.DataAccess;
+using TyperLeague.DataAccess.CQRS;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddTransient<IQueryExecutor, QueryExecutor>();
+builder.Services.AddTransient<ICommandExecutor, CommandExecutor>();
 
 builder.Services.AddAutoMapper(typeof(BetsProfile).Assembly);
 

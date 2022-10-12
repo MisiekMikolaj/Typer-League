@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using TyperLeague.ApplicationServices.API.Domain;
-using TyperLeague.DataAccess;
+using TyperLeague.DataAccess.CQRS;
 using TyperLeague.DataAccess.CQRS.Queries;
 using TyperLeague.DataAccess.Entities;
 

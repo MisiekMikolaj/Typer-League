@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using TyperLeague.ApplicationServices.API.Domain;
-using TyperLeague.DataAccess;
+using TyperLeague.DataAccess.CQRS;
 using TyperLeague.DataAccess.CQRS.Queries;
 using TyperLeague.DataAccess.Entities;
 
@@ -18,7 +18,10 @@ namespace TyperLeague.ApplicationServices.API.Handlers
         }
         public async Task<GetGamesResponse> Handle(GetGamesRequest request, CancellationToken cancellationToken)
         {
-            var query = new GetGamesQuery();
+            var query = new GetGamesQuery()
+            {
+                teamName = request.teamName
+            };
             var games = await this.queryExecutor.Execute(query);
             var mappedgames = this.mapper.Map<List<Domain.Models.Game>>(games);
 
