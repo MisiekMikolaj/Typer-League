@@ -24,7 +24,8 @@ namespace TyperLeague.ApplicationServices.API.Mappings
                 .ForMember(x => x.RealResult, y => y.MapFrom(z => z.RealResult))
                 .ForMember(x => x.UserPrediction, y => y.MapFrom(z => z.UserPrediction))
                 .ForMember(x => x.Deadline, y => y.MapFrom(z => z.Deadline))
-                .ForMember(x => x.User, y => y.MapFrom(z => z.User));
+                .ForMember(x => x.User, y => y.MapFrom(z => z.User))
+                .ForMember(x => x.Id, y => y.MapFrom(z => z.Id));
         }
     }
 }

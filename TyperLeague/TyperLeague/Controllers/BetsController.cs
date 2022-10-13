@@ -24,6 +24,18 @@ namespace TyperLeague.Controllers
             return this.Ok(response);
         }
 
+        [HttpGet]
+        [Route("{betId}")]
+        public async Task<IActionResult> GetBetById([FromRoute] int betId)
+        {
+            var request = new GetBetByIdRequest()
+            {
+                BetId = betId
+            };
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
+
         [HttpPost]
         [Route("")]
         public async Task<IActionResult> AddBeats([FromBody] AddBetsRequest request)
