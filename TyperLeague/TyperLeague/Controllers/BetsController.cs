@@ -43,5 +43,20 @@ namespace TyperLeague.Controllers
             var response = await this.mediator.Send(request);
             return this.Ok(response);
         }
+
+        [HttpPut]
+        [Route("{betId},{firstTeamPointsUserPrediction},{secondTeamPointsUserPrediction}")]
+        public async Task<IActionResult> EditUserPredicionBetResult([FromRoute] int betId, int firstTeamPointsUserPrediction, int secondTeamPointsUserPrediction)
+        {
+            var request = new EditUserPredicionBetResultRequest
+            {
+                BetId = betId,
+                FirstTeamPointsUserPrediction = firstTeamPointsUserPrediction,
+                SecondTeamPointsUserPrediction = secondTeamPointsUserPrediction
+                
+            };
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
     }
 }

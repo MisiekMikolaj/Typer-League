@@ -7,6 +7,7 @@ namespace TyperLeague.ApplicationServices.API.Domain.Models
         [MaxLength(50)]
         public string Name { get; set; }
         public string Info { get; set; }
+        public int GameId { get; set; }
 
         [MaxLength(10)]
         public string RealResult { get; set; }

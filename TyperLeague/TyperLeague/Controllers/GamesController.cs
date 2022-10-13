@@ -29,5 +29,20 @@ namespace TyperLeague.Controllers
             var response = await this.mediator.Send(request);
             return this.Ok(response);
         }
+
+        [HttpPut]
+        [Route("{gameId},{firstTeamPoints},{secondTeamPoints}")]
+        public async Task<IActionResult> EditGamePoints([FromRoute] int gameId, int firstTeamPoints, int secondTeamPoints)
+        {
+            var request = new EditGamePointsRequest
+            {
+                GameId = gameId,
+                FirstTeamPoints = firstTeamPoints,
+                SecondTeamPoints = secondTeamPoints
+
+            };
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
     }
 }

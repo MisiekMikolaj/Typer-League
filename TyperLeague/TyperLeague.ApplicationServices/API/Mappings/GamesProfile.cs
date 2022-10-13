@@ -24,6 +24,10 @@ namespace TyperLeague.ApplicationServices.API.Mappings
                 .ForMember(x => x.SecondTeamId, y => y.MapFrom(z => z.SecondTeamId))
                 .ForMember(x => x.FirstTeamName, y => y.MapFrom(z => z.FirstTeam.Name))
                 .ForMember(x => x.SecondTeamName, y => y.MapFrom(z => z.SecondTeam.Name));
+
+            this.CreateMap<EditGamePointsRequest, TyperLeague.DataAccess.Entities.Game>()
+                .ForMember(x => x.Id, y => y.MapFrom(z => z.GameId))
+                .ForMember(x => x.Result, y => y.MapFrom(z => $"{z.FirstTeamPoints} : {z.SecondTeamPoints}"));
         }
     }
 }
