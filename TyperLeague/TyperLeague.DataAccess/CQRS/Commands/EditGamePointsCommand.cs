@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TyperLeague.DataAccess.CQRS.Commands.CommandsExtensions;
 using TyperLeague.DataAccess.Entities;
 
 namespace TyperLeague.DataAccess.CQRS.Commands
@@ -12,31 +13,9 @@ namespace TyperLeague.DataAccess.CQRS.Commands
             var game = context.Games.Where(x => x.Id == this.Id).FirstOrDefault();
             game.Result = this.Result;
 
-            var bets = context.Bets.Where(x => x.Game.Id == game.Id).Select(x => new Bet 
-            {
-            UserId = x.UserId,
-            RealResult = this.Result,
-            User = x.User,
-            UserPrediction = x.UserPrediction
-            }).ToList();
+            EditGamePointsCommandExtension.UpdateBetsRealResultByGameResult(context, this.Id, this.Result);
+            EditGamePointsCommandExtension.UpdateUserPoints(context, this.Id);
 
-            foreach (var bet in bets)
-            {
-                if(bet.RealResult == bet.UserPrediction)
-                {
-                    bet.User.Points += 1;
-                }
-            }
-            /*foreach(var bet in bets)
-            {
-                if(bet.GameId == game.Id)
-                {
-                    bet.RealResult = this.Result;
-                }
-                
-                
-            }*/
-            
             await context.SaveChangesAsync();
 
             game = await context.Games.Where(y => y.Id == this.Id).Select(x => new Game
