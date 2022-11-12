@@ -2,7 +2,7 @@
 
 namespace TyperLeague.ApplicationServices.API.Domain
 {
-    public class EditGamePointsRequest : IRequest<EditGamePointsResponse>
+    public class EditGamePointsRequest : BaseRequest, IRequest<EditGamePointsResponse>
     {
         public int GameId { get; set; }
         public int FirstTeamPoints { get; set; }

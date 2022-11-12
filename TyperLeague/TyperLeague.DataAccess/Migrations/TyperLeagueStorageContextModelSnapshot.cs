@@ -30,6 +30,9 @@ namespace TyperLeague.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("BetPoints")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Deadline")
                         .HasColumnType("datetime2");
 
@@ -42,8 +45,8 @@ namespace TyperLeague.DataAccess.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(205)
+                        .HasColumnType("nvarchar(205)");
 
                     b.Property<string>("RealResult")
                         .IsRequired()
@@ -64,7 +67,7 @@ namespace TyperLeague.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Bets", (string)null);
+                    b.ToTable("Bets");
                 });
 
             modelBuilder.Entity("TyperLeague.DataAccess.Entities.Game", b =>
@@ -90,7 +93,7 @@ namespace TyperLeague.DataAccess.Migrations
 
                     b.HasIndex("SecondTeamId");
 
-                    b.ToTable("Games", (string)null);
+                    b.ToTable("Games");
                 });
 
             modelBuilder.Entity("TyperLeague.DataAccess.Entities.Team", b =>
@@ -108,7 +111,7 @@ namespace TyperLeague.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teams", (string)null);
+                    b.ToTable("Teams");
                 });
 
             modelBuilder.Entity("TyperLeague.DataAccess.Entities.User", b =>
@@ -137,7 +140,7 @@ namespace TyperLeague.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("TyperLeague.DataAccess.Entities.Bet", b =>

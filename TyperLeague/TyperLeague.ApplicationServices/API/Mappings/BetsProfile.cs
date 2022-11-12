@@ -15,6 +15,7 @@ namespace TyperLeague.ApplicationServices.API.Mappings
                 .ForMember(x => x.Deadline, y => y.MapFrom(z => z.Deadline))
                 .ForMember(x => x.RealResult, y => y.MapFrom(z => "???"))
                 .ForMember(x => x.UserPrediction, y => y.MapFrom(z => "???"))
+                .ForMember(x => x.BetPoints, y => y.MapFrom(z => 0))
                 .ForMember(x => x.User, y => y.MapFrom(z => z.User));
 
             this.CreateMap<TyperLeague.DataAccess.Entities.Bet, Bet>()
@@ -25,6 +26,7 @@ namespace TyperLeague.ApplicationServices.API.Mappings
                 .ForMember(x => x.UserPrediction, y => y.MapFrom(z => z.UserPrediction))
                 .ForMember(x => x.Deadline, y => y.MapFrom(z => z.Deadline))
                 .ForMember(x => x.User, y => y.MapFrom(z => z.User))
+                .ForMember(x => x.BetPoints, y => y.MapFrom(z => z.BetPoints))
                 .ForMember(x => x.Id, y => y.MapFrom(z => z.Id));
 
             this.CreateMap<EditUserPredicionBetResultRequest, TyperLeague.DataAccess.Entities.Bet>()

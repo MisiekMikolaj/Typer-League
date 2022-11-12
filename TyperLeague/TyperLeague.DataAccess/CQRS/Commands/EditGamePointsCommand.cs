@@ -10,11 +10,11 @@ namespace TyperLeague.DataAccess.CQRS.Commands
         public string Result { get; set; }
         public async override Task<Game> Execute(TyperLeagueStorageContext context)
         {
-            var game = context.Games.Where(x => x.Id == this.Id).FirstOrDefault();
+            var game = await context.Games.Where(x => x.Id == this.Id).FirstOrDefaultAsync();
             game.Result = this.Result;
 
             EditGamePointsCommandExtension.UpdateBetsRealResultByGameResult(context, this.Id, this.Result);
-            EditGamePointsCommandExtension.UpdateUserPoints(context, this.Id);
+            EditGamePointsCommandExtension.UpdateUserPointsBetsPoints(context, this.Id);
 
             await context.SaveChangesAsync();
 

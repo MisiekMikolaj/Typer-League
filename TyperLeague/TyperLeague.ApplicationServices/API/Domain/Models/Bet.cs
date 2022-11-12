@@ -14,9 +14,11 @@ namespace TyperLeague.ApplicationServices.API.Domain.Models
 
         [MaxLength(10)]
         public string UserPrediction { get; set; }
+        public int BetPoints { get; set; }
 
         [Required]
         public DateTime Deadline { get; set; }
         public User? User { get; set; }
+
     }
 }

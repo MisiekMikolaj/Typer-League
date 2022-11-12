@@ -4,7 +4,7 @@ using TyperLeague.DataAccess.Entities;
 
 namespace TyperLeague.ApplicationServices.API.Domain
 {
-    public class AddGameRequest : IRequest<AddGameResponse>
+    public class AddGameRequest : BaseRequest, IRequest<AddGameResponse>
     {
         [JsonIgnore]
         public int? FirstTeamId { get; set; }

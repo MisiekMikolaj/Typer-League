@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TyperLeague.ApplicationServices.API.Domain;
 using TyperLeague.DataAccess;
@@ -6,57 +7,61 @@ using TyperLeague.DataAccess.Entities;
 
 namespace TyperLeague.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class BetsController : ControllerBase
+    public class BetsController : ApiControllerBase
     {
-        private readonly IMediator mediator;
-        public BetsController(IMediator mediator)
+        public BetsController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetAllBets([FromQuery] GetBetsRequest request)
+        public Task<IActionResult> GetAllBets([FromQuery] GetBetsRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<GetBetsRequest, GetBetsResponse>(request);
+
         }
 
         [HttpGet]
         [Route("{betId}")]
-        public async Task<IActionResult> GetBetById([FromRoute] int betId)
+        public Task<IActionResult> GetBetById([FromRoute] int betId)
         {
             var request = new GetBetByIdRequest()
             {
                 BetId = betId
             };
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<GetBetByIdRequest, GetBetByIdResponse>(request);
         }
 
+        [Authorize(Policy = "IsAdmin")]
         [HttpPost]
-        [Route("")]
-        public async Task<IActionResult> AddBeats([FromBody] AddBetsRequest request)
+        [Route("/addBet/{gameId}")]
+        public Task<IActionResult> AddBeats([FromBody] AddBetsRequest request, [FromRoute] int gameId)
         {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            request = new AddBetsRequest()
+            {
+                GameId = gameId,
+                Info = request.Info,
+                Deadline = request.Deadline
+            };
+
+            return this.HandleRequest<AddBetsRequest, AddBetsResponse>(request);
         }
 
         [HttpPut]
-        [Route("{betId},{firstTeamPointsUserPrediction},{secondTeamPointsUserPrediction}")]
-        public async Task<IActionResult> EditUserPredicionBetResult([FromRoute] int betId, int firstTeamPointsUserPrediction, int secondTeamPointsUserPrediction)
+        [Route("{id}")]
+        public Task<IActionResult> EditUserPredicionBetResult([FromBody] EditUserPredicionBetResultRequest request, [FromRoute] int id)
         {
-            var request = new EditUserPredicionBetResultRequest
+            request = new EditUserPredicionBetResultRequest()
             {
-                BetId = betId,
-                FirstTeamPointsUserPrediction = firstTeamPointsUserPrediction,
-                SecondTeamPointsUserPrediction = secondTeamPointsUserPrediction
-                
+                BetId = id,
+                FirstTeamPointsUserPrediction = request.FirstTeamPointsUserPrediction,
+                SecondTeamPointsUserPrediction = request.SecondTeamPointsUserPrediction
             };
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+
+            return this.HandleRequest<EditUserPredicionBetResultRequest, EditUserPredicionBetResultResponse>(request);
         }
     }
 }

@@ -18,7 +18,8 @@ namespace TyperLeague.DataAccess.CQRS.Queries
                 RealResult = x.RealResult,
                 UserPrediction = x.UserPrediction,
                 Deadline = x.Deadline,
-                Id = x.Id
+                Id = x.Id,
+                BetPoints = x.BetPoints
             }).ToListAsync();
         }
     }

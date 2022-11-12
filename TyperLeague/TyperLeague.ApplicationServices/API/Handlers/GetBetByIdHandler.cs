@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using TyperLeague.ApplicationServices.API.Domain;
+using TyperLeague.ApplicationServices.API.ErrorHandling;
 using TyperLeague.DataAccess.CQRS;
 using TyperLeague.DataAccess.CQRS.Queries;
 
@@ -24,6 +25,15 @@ namespace TyperLeague.ApplicationServices.API.Handlers
                 Id = request.BetId
             };
             var bet = await this.queryExecutor.Execute(query);
+
+            if (bet == null)
+            {
+                return new GetBetByIdResponse()
+                {
+                    Error = new ErrorModel(ErrorType.NotFound)
+                };
+            }
+
             var mappedBet = this.mapper.Map<Domain.Models.Bet>(bet);
             var response = new GetBetByIdResponse()
             {

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using TyperLeague.ApplicationServices.API.Domain;
+using TyperLeague.ApplicationServices.API.ErrorHandling;
 using TyperLeague.DataAccess;
 using TyperLeague.DataAccess.CQRS;
 using TyperLeague.DataAccess.CQRS.Commands;
@@ -27,14 +28,23 @@ namespace TyperLeague.ApplicationServices.API.Handlers
 
             foreach (var user in context.Users.ToList())
             {
-                listRequest.Add(new AddBetsRequest 
-                { 
+
+                listRequest.Add(new AddBetsRequest
+                {
                     Info = request.Info,
                     Deadline = request.Deadline,
-                    Name = $"{request.FirstTeamName} : {request.SecondTeamName}",
-                    GameId = context.Games.Where(x => x.FirstTeam.Name == request.FirstTeamName && x.SecondTeam.Name == request.SecondTeamName && x.Result == "???").Select(x => x.Id).FirstOrDefault(),
+                    GameId = request.GameId,
+                    Name = ($"{context.Games.Where(x => x.Id == request.GameId && x.Result == "???").Select(x => x.FirstTeam.Name).FirstOrDefault()} : {context.Games.Where(x => x.Id == request.GameId && x.Result == "???").Select(x => x.SecondTeam.Name).FirstOrDefault()}"),
                     User = user
                 });
+
+                if (listRequest.FirstOrDefault().Name == " : ")
+                {
+                    return new AddBetsResponse()
+                    {
+                        Error = new ErrorModel(ErrorType.NotFound)
+                    };
+                }
             }
 
             var bet = this.mapper.Map<List<Bet>>(listRequest);

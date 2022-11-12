@@ -1,48 +1,57 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TyperLeague.ApplicationServices.API.Domain;
 
 namespace TyperLeague.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class GamesController : ControllerBase
+    public class GamesController : ApiControllerBase
     {
-        private readonly IMediator mediator;
-        public GamesController(IMediator mediator)
+        public GamesController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetAllGames([FromQuery] GetGamesRequest request)
+        public Task<IActionResult> GetAllGames([FromQuery] GetGamesRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<GetGamesRequest, GetGamesResponse>(request);
         }
 
+        [Authorize(Policy = "IsAdmin")]
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> AddGame([FromBody] AddGameRequest request)
+        public Task<IActionResult> AddGame([FromBody] AddGameRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<AddGameRequest, AddGameResponse>(request);
         }
 
+        [Authorize(Policy = "IsAdmin")]
         [HttpPut]
-        [Route("{gameId},{firstTeamPoints},{secondTeamPoints}")]
-        public async Task<IActionResult> EditGamePoints([FromRoute] int gameId, int firstTeamPoints, int secondTeamPoints)
+        [Route("{id}")]
+        public Task<IActionResult> EditGamePoints([FromRoute] int id, [FromBody] EditGamePointsRequest request)
         {
-            var request = new EditGamePointsRequest
+            request = new EditGamePointsRequest()
             {
-                GameId = gameId,
-                FirstTeamPoints = firstTeamPoints,
-                SecondTeamPoints = secondTeamPoints
-
+                GameId = id,
+                FirstTeamPoints = request.FirstTeamPoints,
+                SecondTeamPoints = request.SecondTeamPoints
             };
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<EditGamePointsRequest, EditGamePointsResponse>(request);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public Task<IActionResult> GetGame([FromRoute] int id)
+        {
+            var request = new GetGameRequest()
+            {
+                GameId = id
+            };
+            return this.HandleRequest<GetGameRequest, GetGameResponse>(request);
         }
     }
 }

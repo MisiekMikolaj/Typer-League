@@ -2,7 +2,7 @@
 
 namespace TyperLeague.ApplicationServices.API.Domain
 {
-    public class GetTeamsRequest : IRequest<GetTeamsResponse>
+    public class GetTeamsRequest : BaseRequest, IRequest<GetTeamsResponse>
     {
     }
 }

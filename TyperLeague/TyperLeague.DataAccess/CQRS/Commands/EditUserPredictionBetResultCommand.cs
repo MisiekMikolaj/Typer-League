@@ -9,7 +9,7 @@ namespace TyperLeague.DataAccess.CQRS.Commands
         public string UserPrediction { get; set; }
         public override async Task<Bet> Execute(TyperLeagueStorageContext context)
         {
-            var bet = context.Bets.Where(x => x.Id == this.Id).FirstOrDefault();
+            var bet = await context.Bets.Where(x => x.Id == this.Id).FirstOrDefaultAsync();
             bet.UserPrediction = this.UserPrediction;
             await context.SaveChangesAsync();
 

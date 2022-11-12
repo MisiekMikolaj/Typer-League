@@ -10,7 +10,7 @@ namespace TyperLeague.DataAccess.Entities
         public int UserId { get; set; }
         public User? User { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(205)]
         public string Name { get; set; }
         public string Info { get; set; }
 
@@ -22,6 +22,7 @@ namespace TyperLeague.DataAccess.Entities
 
         [Required]
         public DateTime Deadline { get; set; }
+        public int BetPoints { get; set; }
 
     }
 }

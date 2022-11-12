@@ -2,7 +2,7 @@
 
 namespace TyperLeague.ApplicationServices.API.Domain
 {
-    public class EditUserPredicionBetResultRequest : IRequest<EditUserPredicionBetResultResponse>
+    public class EditUserPredicionBetResultRequest : BaseRequest, IRequest<EditUserPredicionBetResultResponse>
     {
         public int BetId { get; set; }
         public int FirstTeamPointsUserPrediction { get; set; }
