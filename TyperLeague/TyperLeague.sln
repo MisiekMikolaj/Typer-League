@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TyperLeague", "TyperLeague\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TyperLeague.DataAccess", "TyperLeague.DataAccess\TyperLeague.DataAccess.csproj", "{4BCB9F19-8752-4810-BC12-E7918B2346D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TyperLeague.ApplicationServices", "TyperLeague.ApplicationServices\TyperLeague.ApplicationServices.csproj", "{54FCB2B4-6283-49B4-8297-6EB43E895BFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TyperLeague.ApplicationServices", "TyperLeague.ApplicationServices\TyperLeague.ApplicationServices.csproj", "{54FCB2B4-6283-49B4-8297-6EB43E895BFC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp", "C:\Users\Legion\Desktop\zaczynammKariere\blazorTyperLeague\ZKJ_BlazorApp-main\BlazorApp.csproj", "{9A79D1E4-A5EC-4496-A38A-497E0245F56F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{54FCB2B4-6283-49B4-8297-6EB43E895BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54FCB2B4-6283-49B4-8297-6EB43E895BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54FCB2B4-6283-49B4-8297-6EB43E895BFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A79D1E4-A5EC-4496-A38A-497E0245F56F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A79D1E4-A5EC-4496-A38A-497E0245F56F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A79D1E4-A5EC-4496-A38A-497E0245F56F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A79D1E4-A5EC-4496-A38A-497E0245F56F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
